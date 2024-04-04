@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DynamicMemory", "DynamicMem
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TransferParameters", "TransferParameters\TransferParameters.vcxproj", "{A2735052-1391-4F9E-B78D-810B03BC06CD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "References", "References\References.vcxproj", "{5EF0B8FE-6BA5-4140-8D62-8BDC9B80C773}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{A2735052-1391-4F9E-B78D-810B03BC06CD}.Release|x64.Build.0 = Release|x64
 		{A2735052-1391-4F9E-B78D-810B03BC06CD}.Release|x86.ActiveCfg = Release|Win32
 		{A2735052-1391-4F9E-B78D-810B03BC06CD}.Release|x86.Build.0 = Release|Win32
+		{5EF0B8FE-6BA5-4140-8D62-8BDC9B80C773}.Debug|x64.ActiveCfg = Debug|x64
+		{5EF0B8FE-6BA5-4140-8D62-8BDC9B80C773}.Debug|x64.Build.0 = Debug|x64
+		{5EF0B8FE-6BA5-4140-8D62-8BDC9B80C773}.Debug|x86.ActiveCfg = Debug|Win32
+		{5EF0B8FE-6BA5-4140-8D62-8BDC9B80C773}.Debug|x86.Build.0 = Debug|Win32
+		{5EF0B8FE-6BA5-4140-8D62-8BDC9B80C773}.Release|x64.ActiveCfg = Release|x64
+		{5EF0B8FE-6BA5-4140-8D62-8BDC9B80C773}.Release|x64.Build.0 = Release|x64
+		{5EF0B8FE-6BA5-4140-8D62-8BDC9B80C773}.Release|x86.ActiveCfg = Release|Win32
+		{5EF0B8FE-6BA5-4140-8D62-8BDC9B80C773}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
