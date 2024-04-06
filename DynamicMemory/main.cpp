@@ -11,17 +11,20 @@ void Print(int** arr, const int rows, const int cols);
 
 int* push_back(int arr[], int& n, const int value);
 int* push_front(int arr[], int& n, const int value);
+int* insert(int arr[], int& n, const int value);
 
 int* pop_back(int arr[], int& n);
+int* pop_front(int arr[], int& n);
+int* erase(int arr[], int& n);
 
 //#define DINAMIC_MEMORY_1
-#define DINAMIC_MEMORY_2
+//#define DINAMIC_MEMORY_2
 
 void main()
 {
 	setlocale(LC_ALL, "");
 
-#ifdef DYNAMIC_MEMORY_1
+//#ifdef DYNAMIC_MEMORY_1
 	int n = 5;
 	cout << "¬ведите количество элементов: "; cin >> n;
 
@@ -36,22 +39,32 @@ void main()
 
 	int value;
 	cout << "¬ведите добавл€емое значение: "; cin >> value;
-
 	arr = push_back(arr, n, value);
 	Print(arr, n);
-	cout << "¬ведите добавл€емое значение: "; cin >> value;
 
+	cout << "¬ведите добавл€емое значение: "; cin >> value;
 	arr = push_front(arr, n, value);
+	Print(arr, n);
+
+	cout << "¬ведите добавл€емое значение: "; cin >> value;
+	arr = insert(arr, n, value);
 	Print(arr, n);
 
 	arr = pop_back(arr, n);
 	Print(arr, n);
+
+	arr = pop_front(arr, n);
+	Print(arr, n);
+
+	arr = erase(arr, n);
+	Print(arr, n);
+
 	//3) ”даление динамического массива:
 	delete[] arr;
 	//Memory Leak
-#endif
+//#endif
 
-#ifdef DINAMIC_MEMORY_2
+/*#ifdef DINAMIC_MEMORY_2
 
 	int rows;
 	int cols;
@@ -66,7 +79,7 @@ void main()
 	for (int i = 0; i < rows; i++) delete[] arr[i];
 	delete[]arr;
 	
-#endif
+#endif*/
 
 }
 void FillRand(int arr[], const int n)
@@ -109,6 +122,20 @@ int* push_front(int arr[], int& n, const int value)
 	n++;
 	return buffer;
 }
+int* insert(int arr[], int& n, const int value)
+{
+	int num;
+	cout << "¬ведите индекс элемента: "; cin >> num;
+	int* buffer = new int[n + 1];
+	for (int i = 0; i < num; i++) buffer[i] = arr[i];
+	buffer[num] = value;
+	for (int i = num; i < n; i++) buffer[i+1] = arr[i];
+
+	delete[] arr;
+	n++;
+	
+	return buffer;
+}
 int* pop_back(int arr[], int& n)
 {
 	/*int* buffer = new int[n - 1];
@@ -125,6 +152,23 @@ int* pop_back(int arr[], int& n)
 	return buffer; 
 
 
+}
+int* pop_front(int arr[], int& n)
+{
+	int* buffer = new int[--n];
+	for (int i = 0; i < n; i++) buffer[i] = arr[i+1];
+	delete[] arr;
+	return buffer;
+}
+int* erase(int arr[], int& n)
+{
+	int num;
+	cout << "¬ведите индекс элемента: "; cin >> num;
+	int* buffer = new int[--n];
+	for (int i = 0; i < num; i++) buffer[i] = arr[i];
+	for (int i = num; i < n; i++) buffer[i] = arr[i+1];
+	delete[] arr;
+	return buffer;
 }
 void Print(int** arr, const int rows, const int cols)
 {
