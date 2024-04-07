@@ -5,6 +5,16 @@ using std::endl;
 
 #define tab "\t";
 
+int** Allocate(const int rows, const int cols);
+void Clear(int** arr, const int rows);
+int** push_row_back(int** arr, int& rows, const int cols);
+void FillRand(int** arr, const  int rows, const int cols,int MinRand, int MaxRand);
+
+
+void push_col_back(int** arr, const int rows, int& cols);
+
+void pop_col_back(int** arr, const int rows, int& cols);
+
 void FillRand(int arr[], const int n);
 void Print(int arr[], const int n);
 void Print(int** arr, const int rows, const int cols);
@@ -17,14 +27,19 @@ int* pop_back(int arr[], int& n);
 int* pop_front(int arr[], int& n);
 int* erase(int arr[], int& n);
 
+//void Allocate(int** arr, const int rows, const int cols);
+//void Clear(int** arr, const int rows, const int cols);
+
+//int** push_row_back(int** arr, int& rows, const int cols);
+
 //#define DINAMIC_MEMORY_1
-//#define DINAMIC_MEMORY_2
+#define DINAMIC_MEMORY_2
 
 void main()
 {
 	setlocale(LC_ALL, "");
 
-//#ifdef DYNAMIC_MEMORY_1
+#ifdef DYNAMIC_MEMORY_1
 	int n = 5;
 	cout << "¬ведите количество элементов: "; cin >> n;
 
@@ -62,24 +77,35 @@ void main()
 	//3) ”даление динамического массива:
 	delete[] arr;
 	//Memory Leak
-//#endif
+#endif
 
-/*#ifdef DINAMIC_MEMORY_2
+#ifdef DINAMIC_MEMORY_2
 
 	int rows;
 	int cols;
 	cout << "¬ведите колличество строк:  "; cin >> rows;
 	cout << "¬ведите колличество столбцов: "; cin >> cols;
-	int** arr = new int*[rows];
-	for (int i = 0; i < rows; i++)
-	{
-		arr[i] = new int[cols] {};
-	}
-	Print(arr, rows, cols); 
-	for (int i = 0; i < rows; i++) delete[] arr[i];
-	delete[]arr;
+	Allocate(rows, cols);
 	
-#endif*/
+	Print(arr, rows, cols); 
+	FillRand (arr[rows-1], rows, cols,100,1000);
+	Print(arr, rows, cols);
+
+	arr=push_row_back(arr, rows, cols);
+	Print(arr, rows, cols);
+
+	arr = pop_row_back(arr,rows,cols);
+	Print(arr, rows, cols);
+	pop_col_back
+
+	push_col_back(arr, rows, cols);
+	Print(arr, rows, cols);
+	//arr = push_row_back(arr, rows, cols);
+	//Print(arr, rows, cols);
+	
+	Clear(arr, rows);
+	
+#endif
 
 }
 void FillRand(int arr[], const int n)
@@ -179,5 +205,86 @@ void Print(int** arr, const int rows, const int cols)
 			cout << arr[i][j] << tab;
 		}
 		cout << endl;
+	}
+	cout << endl;
+}
+/**void Allocate(int** arr, const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		arr [i] = new int[cols] {};
+	}
+}
+
+int** push_row_back(int** arr, int& rows, int cols)
+{
+	int** buffer = new int*[rows + 1];
+	
+	Allocate(arr , rows, cols);
+	Clear(arr , rows, cols);
+	rows++;
+	return buffer;
+}*/
+int** Allocate(const int rows, const int cols)
+{
+	int** arr = new int* [rows];
+	for (int i = 0; i < rows; i++)
+	{
+		arr[i] = new int[cols] {};
+	}
+	return arr;
+}
+void Clear(int** arr, const int rows)
+{
+	for (int i = 0; i < rows; i++) delete[] arr[i];
+	delete[]arr;
+}
+int** push_row_back(int** arr, int& rows, const int cols)
+{
+	int** buffer = new int* [rows + 1];
+	for (int i = 0; i < cols; i++)buffer[i] = arr[i];
+	delete[] arr;
+	rows++;
+	return buffer;
+}
+void FillRand(int** arr,const  int rows, const int cols, int MinRand, int MaxRand)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			arr[i][j] = rand() % (MaxRand-MinRand)+MinRand;
+		}
+	}
+	//return arr;
+}
+int** pop_row_back(int** arr,int& rows, const int cols)
+{
+	int** buffer = new int* [--rows];
+	delete[] arr[rows];
+	for (int i = 0; i < rows; i++) buffer[i] = arr[i];
+	delete[]arr;
+	return buffer;
+}
+void push_col_back(int** arr, const int rows, int& cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		int* buffer = new int[cols + 1] {};
+		for (int j = 0; i < cols; j++)buffer[j] = arr[i][j];
+		delete[] arr[i];
+		arr[i] = buffer;
+	}
+	cols++;
+}
+void pop_col_back(int** arr, const int rows, int& cols)
+{
+	cols--;
+	for (int i = 0; i < rows; i++)
+	{
+		int* buffer = new int[cols] {};
+		for (int j = 0; j < cols; j++) buffer[j] = arr[i][j];
+		delete[] arr[i];
+		arr[i] = buffer;
 	}
 }
